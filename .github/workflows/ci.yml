@@ -40,7 +40,6 @@ jobs:
           -e "s|{ARG_OS}|${BIN_OS}|g" \
           -e "s|{ARG_FROM}|${BASEIMAGE}|g" \
           Dockerfile.in > Dockerfile
-        cp ${BIN} ${BIN}-${BIN_OS}-${BIN_ARCH}
         cp -r bin/linux_amd64/ip-masq-agent /tmp/.buildx-cache
     - uses: actions/cache@v3
       with:
