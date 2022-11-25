@@ -9,8 +9,8 @@ on:
 
 env:
   REGISTRY: tsuru/ip-masq-agent
-  OS: linux
-  ARCH: amd64
+  BIN_OS: linux
+  BIN_ARCH: amd64
   BIN: ip-masq-agent
   BASEIMAGE: k8s.gcr.io/build-image/distroless-iptables:v0.1.1
 
@@ -42,8 +42,8 @@ jobs:
         make all
         sed \
           -e "s|{ARG_BIN}|${BIN}|g" \
-          -e "s|{ARG_ARCH}|${ARCH}|g" \
-          -e "s|{ARG_OS}|${OS}|g" \
+          -e "s|{ARG_ARCH}|${BIN_ARCH}|g" \
+          -e "s|{ARG_OS}|${BIN_OS}|g" \
           -e "s|{ARG_FROM}|${BASEIMAGE}|g" \
           Dockerfile.in > Dockerfile
         cat Dockerfile
