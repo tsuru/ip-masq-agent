@@ -30,6 +30,7 @@ jobs:
     needs: [ test ]
     steps:
     - uses: actions/checkout@v3
+    - uses: docker/setup-buildx-action@v2
     - name: Build binary
       run: |
         make all
@@ -39,8 +40,8 @@ jobs:
           -e "s|{ARG_OS}|${BIN_OS}|g" \
           -e "s|{ARG_FROM}|${BASEIMAGE}|g" \
           Dockerfile.in > Dockerfile
-        cat Dockerfile
-    - uses: docker/setup-buildx-action@v2
+        cp ${BIN} ${BIN}-${BIN_OS}-${BIN_ARCH}
+        cp -r bin/linux_amd64/ip-masq-agent /tmp/.buildx-cache
     - uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
